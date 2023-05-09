@@ -2,8 +2,9 @@
   background-color: var(--gray-600);
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .main > form {
@@ -23,7 +24,7 @@ form > input {
 }
 
 form > input:focus {
-  border: 1px solid var(--purple-600);
+  outline: 1px solid var(--purple-600);
 }
 
 form > button[type="submit"] {
@@ -45,6 +46,37 @@ form > button[type="submit"]:hover {
   cursor: pointer;
 }
 
-.inputTasks {
+.tasksCounter {
+  margin-top: 4rem;
+  width: 76.5rem;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
 
+.tasksCounter p:first-child {
+  color: var(--blue-400);
+}
+
+.tasksCounter p:first-child span {
+  color: var(--gray-200);
+  font-size: 0.75rem;
+  background-color: var(--gray-400);
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  margin-left: 0.5rem;
+}
+
+.tasksCounter p:last-child {
+  color: var(--purple-400);
+}
+
+.tasksCounter p:last-child span {
+  color: var(--gray-200);
+  font-size: 0.75rem;
+  background-color: var(--gray-400);
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  margin-left: 0.5rem;
 }
