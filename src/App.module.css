@@ -1,0 +1,50 @@
+.main {
+  background-color: var(--gray-600);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.main > form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: calc(0px - 1.69rem + 1px);
+}
+
+form > input {
+  background-color: var(--gray-500);
+  color: var(--gray-100);
+  border: 1px solid var(--gray-700) !important;
+  border-radius: 8px;
+  width: calc(39.875rem + 2px);
+  height: calc(3.375rem + 2px);
+  padding: 0.5rem;
+}
+
+form > input:focus {
+  border: 1px solid var(--purple-600);
+}
+
+form > button[type="submit"] {
+  background-color: var(--blue-600);
+  color: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: bold;
+  gap: 0.5rem;
+}
+
+form > button[type="submit"]:hover {
+  background-color: var(--blue-400);
+  cursor: pointer;
+}
+
+.inputTasks {
+
+}
