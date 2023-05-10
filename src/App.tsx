@@ -1,4 +1,4 @@
-import {PlusCircle} from 'phosphor-react'
+import {Notepad, PlusCircle} from 'phosphor-react'
 
 import { Header } from './Components/Header'
 
@@ -32,8 +32,10 @@ export function App() {
           <p>Concluídas <span>0</span></p>
         </div>
 
-        <div className={styles.tasksTable}>
-
+        <div className={styles.emptyTasksTable}>
+          <Notepad className={styles.img} size={56}/>
+          <p>Você ainda não tem tarefas cadastradas</p>
+          <p>Crie tarefas e organize seus itens a fazer</p>
         </div>
       </main>
     </>
