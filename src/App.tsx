@@ -4,8 +4,12 @@ import { Header } from './Components/Header'
 
 import styles from './App.module.css'
 import './global.css'
+import { useState } from 'react'
+import { Task } from './Components/Task'
 
 export function App() {
+  const conteudo = "tarefa"
+
   return (
     <>
       <header>
@@ -32,11 +36,18 @@ export function App() {
           <p>Concluídas <span>0</span></p>
         </div>
 
-        <div className={styles.emptyTasksTable}>
+        {/* <div className={styles.emptyTasksTable}>
           <Notepad className={styles.img} size={56}/>
           <p>Você ainda não tem tarefas cadastradas</p>
           <p>Crie tarefas e organize seus itens a fazer</p>
+        </div> */}
+
+        <div className={styles.tasksTable}>
+          <Task
+            taskContent={conteudo}
+          />
         </div>
+        
       </main>
     </>
   )
