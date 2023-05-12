@@ -8,7 +8,7 @@ interface TaskProps {
 }
 
 export function Task({taskContent}: TaskProps) {
-  const [isTaskDone, setIsTaskDone] = useState(false);
+  const [isTaskDone, setIsTaskDone] = useState(true);
   const [tasks, setTasks] = useState([
     {
       content: ""
@@ -23,25 +23,26 @@ export function Task({taskContent}: TaskProps) {
     <div className={styles.task}>
       {
         isTaskDone ?
-        <>
+        <div className={styles.undoneTask}>
           <Circle
+            className={styles.undoneCircle}
             onClick={toggle}
             size={24}
-            className={styles.undoneTask}
           /> 
           <p>{taskContent}</p>
-        </> :
-        <>
+          <Trash size={14} className={styles.trash}/>
+        </div> :
+        <div className={styles.doneTasks}>
           <CheckCircle
+            className={styles.doneCircle}
             onClick={toggle}
             size={24}
             weight="fill"
-            className={styles.doneTask}
           />
           <p className={styles.doneTaskParagraph}> {taskContent} </p>
-        </>
+          <Trash size={14} className={styles.trash}/>
+        </div>
       }
-      <Trash size={14} className={styles.trash}/>
     </div>
   )
 }

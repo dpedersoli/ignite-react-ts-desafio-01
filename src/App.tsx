@@ -1,14 +1,33 @@
-import {Notepad, PlusCircle} from 'phosphor-react'
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 
 import { Header } from './Components/Header'
+import { Task } from './Components/Task'
+
+import {Notepad, PlusCircle} from 'phosphor-react'
 
 import styles from './App.module.css'
 import './global.css'
-import { useState } from 'react'
-import { Task } from './Components/Task'
 
 export function App() {
-  const conteudo = "tarefa"
+  const [tasks, setTasks] = useState([])
+  const [ newTaskText, setNewTaskText] = useState('');
+
+  function handleCreateNewTask(event: FormEvent) {
+    event.preventDefault()
+
+    setTasks([...tasks, newTaskText ])
+
+    setNewTaskText('')
+  }
+
+  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('')
+    setNewTaskText(event.target.value)
+  }
+
+  function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('Esse campo é obrigatório')
+  }
 
   return (
     <>
@@ -18,10 +37,14 @@ export function App() {
 
       <main className={styles.main}>
 
-        <form>
+        <form onSubmit={handleCreateNewTask}>
           <input
             type="text"
             placeholder="Adicione uma nova tarefa"
+            value={newTaskText}
+            onChange={handleNewTaskChange}
+            onInvalid={handleNewTaskInvalid}
+            required
           />
           <button
             type="submit"
@@ -36,17 +59,27 @@ export function App() {
           <p>Concluídas <span>0</span></p>
         </div>
 
-        {/* <div className={styles.emptyTasksTable}>
-          <Notepad className={styles.img} size={56}/>
-          <p>Você ainda não tem tarefas cadastradas</p>
-          <p>Crie tarefas e organize seus itens a fazer</p>
-        </div> */}
 
-        <div className={styles.tasksTable}>
-          <Task
-            taskContent={conteudo}
-          />
-        </div>
+
+        {
+          tasks.length > 0 ? 
+          <div className={styles.tasksTable}>
+          {tasks.map(task => {
+            return (
+              <Task
+              taskContent={task}
+            />
+            )
+          })}
+          </div> :
+          <div className={styles.emptyTasksTable}>
+            <Notepad className={styles.img} size={56}/>
+            <p>Você ainda não tem tarefas cadastradas</p>
+            <p>Crie tarefas e organize seus itens a fazer</p>
+          </div>
+        }
+
+
         
       </main>
     </>
