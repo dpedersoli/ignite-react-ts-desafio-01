@@ -102,6 +102,6 @@ form > button[type="submit"]:hover {
   font-weight: bold;
 }
 
-.tasksTable {
-  
+.errorMessage {
+  color: var(--red-400);
 }

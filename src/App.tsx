@@ -9,24 +9,28 @@ import styles from './App.module.css'
 import './global.css'
 
 export function App() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
+  // const [error, setError] = useState(false);
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
 
-    setTasks([...tasks, newTaskText])
+    try{
+      if(newTaskText.length > 0) {
+        setTasks([...tasks, newTaskText])
 
-    setNewTaskText('')
+        setNewTaskText('')
+
+        // setError(false)
+      }
+    }catch (err){
+      // setError(true)
+    }
   }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
-    event.target.setCustomValidity('')
     setNewTaskText(event.target.value)
-  }
-
-  function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
-    event.target.setCustomValidity('Esse campo é obrigatório')
   }
 
   return (
@@ -43,8 +47,6 @@ export function App() {
             placeholder="Adicione uma nova tarefa"
             value={newTaskText}
             onChange={handleNewTaskChange}
-            onInvalid={handleNewTaskInvalid}
-            required
           />
           <button
             type="submit"
@@ -53,6 +55,10 @@ export function App() {
             <PlusCircle size={18} />
           </button>
         </form>
+
+        {/* { error &&
+          <p className={styles.errorMessage} >Esse campo é obrigatório</p>
+        } */}
 
         <div className={styles.tasksCounter}>
           <p>Tarefas criadas <span>0</span></p>
