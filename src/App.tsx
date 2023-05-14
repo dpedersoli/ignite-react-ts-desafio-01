@@ -11,22 +11,20 @@ import './global.css'
 export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
-  // const [error, setError] = useState(false);
+  const [error, setError] = useState(false);
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
 
-    try{
       if(newTaskText.length > 0) {
         setTasks([...tasks, newTaskText])
 
         setNewTaskText('')
 
-        // setError(false)
+        setError(false)
+      } else {
+        setError(true)
       }
-    }catch (err){
-      // setError(true)
-    }
   }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -56,16 +54,14 @@ export function App() {
           </button>
         </form>
 
-        {/* { error &&
+        { error &&
           <p className={styles.errorMessage} >Esse campo é obrigatório</p>
-        } */}
+        }
 
         <div className={styles.tasksCounter}>
           <p>Tarefas criadas <span>0</span></p>
-          <p>Concluídas <span>0</span></p>
+          <p>Concluídas <span>0 de 0</span></p>
         </div>
-
-
 
         {
           tasks.length > 0 ?
