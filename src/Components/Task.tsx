@@ -9,11 +9,6 @@ interface TaskProps {
 
 export function Task({taskContent}: TaskProps) {
   const [isTaskDone, setIsTaskDone] = useState(true);
-  const [tasks, setTasks] = useState([
-    {
-      content: ""
-    }
-  ]);
 
   function toggle(){
     setIsTaskDone(!isTaskDone);
