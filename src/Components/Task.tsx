@@ -21,8 +21,8 @@ export function Task({taskContent, onDeleteTask}: TaskProps) {
 
   return (
     <div className={styles.task}>
-      {
-        isTaskDone ?
+      {/* {
+        isTaskDone ? */}
         <div className={styles.undoneTask}>
           <Circle
             className={styles.undoneCircle}
@@ -30,9 +30,11 @@ export function Task({taskContent, onDeleteTask}: TaskProps) {
             size={24}
           /> 
           <p>{taskContent}</p>
-          <Trash size={14} className={styles.trash}/>
-        </div> :
-        <div className={styles.doneTasks}>
+          <button onClick={handleDeleteTask} title="deletar tarefa">
+            <Trash size={14} className={styles.trash}/>
+          </button>
+        </div>
+        {/* : <div className={styles.doneTasks}>
           <CheckCircle
             className={styles.doneCircle}
             onClick={toggle}
@@ -44,7 +46,7 @@ export function Task({taskContent, onDeleteTask}: TaskProps) {
             <Trash size={14} className={styles.trash}/>
           </button>
         </div>
-      }
+      } */}
     </div>
   )
 }

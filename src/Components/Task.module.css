@@ -49,9 +49,18 @@
 }
 
 .trash:hover {
+  color: var(--red-400);
+}
+
+.undoneTask > button {
+  background-color: var(--gray-500);
+  border: none;
+}
+
+.undoneTask > button:hover {
   background: var(--gray-400);
   border-radius: 4px;
-  color: var(--red-400);
+  height: 1.2rem;
   cursor: pointer;
   transition: all 0.3s;
 }
