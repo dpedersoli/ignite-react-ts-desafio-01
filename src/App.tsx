@@ -101,7 +101,8 @@ export function App() {
 // 4. se array de task > 0 mostra as tasks, se não, mostra a tela estilizada sem tarefa FEITO
 // 5. mostrar erro de caracteres FEITO
 
-// 6. criar chamamento da função onde o component é chamado ('app.tsx')
-// 7. criar função de deleção dentro do componente
+// 6. função de deletar 
+
+// 7. consertar a função de tarefa pronta/não-pronta
 
 // 8. contador de tarefas
