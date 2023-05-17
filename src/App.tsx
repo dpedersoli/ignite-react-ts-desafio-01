@@ -31,6 +31,14 @@ export function App() {
     setNewTaskText(event.target.value)
   }
 
+  function deleteTask(taskToDelete: string) {
+    const tasksWithoutDeletedOne = tasks.filter(task => {
+      return task != taskToDelete
+    })
+
+    setTasks(tasksWithoutDeletedOne)
+  }
+
   return (
     <>
       <header>
@@ -70,6 +78,7 @@ export function App() {
                 return (
                   <Task
                     taskContent={task}
+                    onDeleteTask={deleteTask}
                   />
                 )
               })}
@@ -81,18 +90,18 @@ export function App() {
             </div>
         }
 
-
-
       </main>
     </>
   )
 }
 
-// 1. crio uma array de conteúdos(p) das tasks com valor inicial[]
-// 2. valor do input p / dentro do array de task que terá o conteúdo das task
-// 3. dou um map nas tasks
-// 4. se array de task > 0 mostra as tasks, se não, mostra a tela estilizada sem tarefa
+// 1. crio uma array de conteúdos(p) das tasks com valor inicial[] FEITO
+// 2. valor do input p / dentro do array de task que terá o conteúdo das task FEITO
+// 3. dou um map nas tasks FEITO
+// 4. se array de task > 0 mostra as tasks, se não, mostra a tela estilizada sem tarefa FEITO
+// 5. mostrar erro de caracteres FEITO
 
-// 5. contador de tarefas
+// 6. criar chamamento da função onde o component é chamado ('app.tsx')
+// 7. criar função de deleção dentro do componente
 
-// 6. excluir tarefas
+// 8. contador de tarefas

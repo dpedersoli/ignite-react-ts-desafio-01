@@ -5,10 +5,15 @@ import styles from './Task.module.css'
 
 interface TaskProps {
   taskContent: string;
+  onDeleteTask: (task: string) => void
 }
 
-export function Task({taskContent}: TaskProps) {
+export function Task({taskContent, onDeleteTask}: TaskProps) {
   const [isTaskDone, setIsTaskDone] = useState(true);
+
+  function handleDeleteTask() {
+    onDeleteTask(taskContent)
+  }
 
   function toggle(){
     setIsTaskDone(!isTaskDone);
@@ -35,7 +40,9 @@ export function Task({taskContent}: TaskProps) {
             weight="fill"
           />
           <p className={styles.doneTaskParagraph}> {taskContent} </p>
-          <Trash size={14} className={styles.trash}/>
+          <button onClick={handleDeleteTask} title="deletar tarefa">
+            <Trash size={14} className={styles.trash}/>
+          </button>
         </div>
       }
     </div>
