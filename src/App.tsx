@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { Header } from './Components/Header'
 import { Task } from './Components/Task'
@@ -39,6 +39,10 @@ export function App() {
     setTasks(tasksWithoutDeletedOne)
   }
 
+  function checkTask(taskToCheck: boolean){
+    return !taskToCheck
+  }
+
   return (
     <>
       <header>
@@ -67,18 +71,20 @@ export function App() {
         }
 
         <div className={styles.tasksCounter}>
-          <p>Tarefas criadas <span>0</span></p>
-          <p>Concluídas <span>0 de 0</span></p>
+          <p>Tarefas criadas <span>{tasks.length}</span></p>
+          <p>Concluídas <span>0 de {tasks.length}</span></p>
         </div>
 
         {
           tasks.length > 0 ?
             <div className={styles.tasksTable}>
-              {tasks.map(task => {
+              {tasks.map((task, id) => {
                 return (
                   <Task
+                    key={id}
                     taskContent={task}
                     onDeleteTask={deleteTask}
+                    onTaskChecked={checkTask}
                   />
                 )
               })}
@@ -103,6 +109,8 @@ export function App() {
 
 // 6. função de deletar FEITO
 
-// 7. consertar a função de tarefa pronta/não-pronta
+// 7. consertar a função de tarefa pronta/não-pronta FEITO COM FALHAS
 
-// 8. contador de tarefas
+// 8. contador de tarefas criadas FEITO
+// 9. contador de tarefas concluídas 
+// 9.1 enviar o 'true'/'false' de cada tarefa KEY

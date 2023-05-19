@@ -6,27 +6,28 @@ import styles from './Task.module.css'
 interface TaskProps {
   taskContent: string;
   onDeleteTask: (task: string) => void
+  onTaskChecked: (task: boolean) => void
 }
 
-export function Task({taskContent, onDeleteTask}: TaskProps) {
+export function Task({taskContent, onDeleteTask, onTaskChecked}: TaskProps) {
   const [isTaskDone, setIsTaskDone] = useState(true);
 
   function handleDeleteTask() {
     onDeleteTask(taskContent)
   }
 
-  function toggle(){
-    setIsTaskDone(!isTaskDone);
+  function handleTaskCheck(){
+    onTaskChecked(!isTaskDone);
   }
 
   return (
     <div className={styles.task}>
-      {/* {
-        isTaskDone ? */}
+      {
+        isTaskDone ?
         <div className={styles.undoneTask}>
           <Circle
             className={styles.undoneCircle}
-            onClick={toggle}
+            onClick={handleTaskCheck}
             size={24}
           /> 
           <p>{taskContent}</p>
@@ -34,10 +35,10 @@ export function Task({taskContent, onDeleteTask}: TaskProps) {
             <Trash size={14} className={styles.trash}/>
           </button>
         </div>
-        {/* : <div className={styles.doneTasks}>
+        : <div className={styles.doneTasks}>
           <CheckCircle
             className={styles.doneCircle}
-            onClick={toggle}
+            onClick={handleTaskCheck}
             size={24}
             weight="fill"
           />
@@ -46,7 +47,7 @@ export function Task({taskContent, onDeleteTask}: TaskProps) {
             <Trash size={14} className={styles.trash}/>
           </button>
         </div>
-      } */}
+      }
     </div>
   )
 }
