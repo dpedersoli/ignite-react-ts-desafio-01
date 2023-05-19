@@ -101,7 +101,7 @@ export function App() {
 // 4. se array de task > 0 mostra as tasks, se não, mostra a tela estilizada sem tarefa FEITO
 // 5. mostrar erro de caracteres FEITO
 
-// 6. função de deletar 
+// 6. função de deletar FEITO
 
 // 7. consertar a função de tarefa pronta/não-pronta
 
