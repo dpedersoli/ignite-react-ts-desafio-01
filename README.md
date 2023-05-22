@@ -8,4 +8,4 @@
 
 ### Remover uma tarefa da listagem
 
-### Mostrar o progresso de conclusão das tarefas#
+### Mostrar o progresso de conclusão das tarefas
