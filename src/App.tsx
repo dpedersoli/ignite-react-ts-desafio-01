@@ -8,25 +8,44 @@ import { Notepad, PlusCircle } from 'phosphor-react'
 import styles from './App.module.css'
 import './global.css'
 
-// import TodoList from './TodoList';
-
 export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
-  const [error, setError] = useState(false);
+  const [doneTasks, setDoneTasks] = useState(0);
+  const [isTaskExists, setIsTaskExists] = useState(false)
+  const [isInputEmpty, setIsInputEmpty] = useState(false);
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
 
       if(newTaskText.length > 0) {
-        setTasks([...tasks, newTaskText])
 
-        setNewTaskText('')
+        if (!checkIfTaskExists(newTaskText)) {
 
-        setError(false)
+          setTasks([...tasks, newTaskText])
+          
+          setNewTaskText('')
+
+          setIsInputEmpty(false)
+          setIsTaskExists(false)
+        } else {
+          setIsTaskExists(true)
+          setIsInputEmpty(false)
+        } 
+        
       } else {
-        setError(true)
+        setIsInputEmpty(true)
+        setIsTaskExists(false)
       }
+  }
+
+  function checkIfTaskExists(curentTaskInput: string) {
+    for (let i = 0; i < tasks.length; i++) {
+
+      if (curentTaskInput == tasks[i]) {
+        return true;
+      }
+    }
   }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -39,19 +58,18 @@ export function App() {
     })
 
     setTasks(tasksWithoutDeletedOne)
+
+    if(doneTasks >= tasks.length) {
+      setDoneTasks(doneTasks - 1)
+    }
   }
 
-  function checkTask(taskToCheck: boolean){
-    const updatedCheckedTasks = tasks.map((task: any) => {
-      if (task.onTaskChecked === taskToCheck) {
-        return { ...task, onTaskChecked: !taskToCheck };
-      }
-      return task;
-    });
-    
-    setTasks(updatedCheckedTasks);
-
-    // return !taskToCheck
+  function taskCounter(taskToCount: boolean) {
+    if(!taskToCount){
+      setDoneTasks(doneTasks - 1)
+    } else if (taskToCount){
+      setDoneTasks(doneTasks + 1)
+    }
   }
 
   return (
@@ -77,13 +95,17 @@ export function App() {
           </button>
         </form>
 
-        { error &&
+        { isInputEmpty &&
           <p className={styles.errorMessage} >Esse campo é obrigatório</p>
+        }
+
+        { isTaskExists &&
+          <p className={styles.errorMessage} >Essa tarefa já existe na lista. Crie uma nova</p>
         }
 
         <div className={styles.tasksCounter}>
           <p>Tarefas criadas <span>{tasks.length}</span></p>
-          <p>Concluídas <span>0 de {tasks.length}</span></p>
+          <p>Concluídas <span>{doneTasks} de {tasks.length}</span></p>
         </div>
 
         {
@@ -92,10 +114,10 @@ export function App() {
               {tasks.map((task) => {
                 return (
                   <Task
+                    onTaskCount={taskCounter}
                     key={task}
                     taskContent={task}
                     onDeleteTask={deleteTask}
-                    onTaskChecked={checkTask}
                   />
                 )
               })}
@@ -108,21 +130,6 @@ export function App() {
         }
 
       </main>
-      {/* <TodoList/> */}
     </>
   )
 }
-
-// 1. crio uma array de conteúdos(p) das tasks com valor inicial[] FEITO
-// 2. valor do input p / dentro do array de task que terá o conteúdo das task FEITO
-// 3. dou um map nas tasks FEITO
-// 4. se array de task > 0 mostra as tasks, se não, mostra a tela estilizada sem tarefa FEITO
-// 5. mostrar erro de caracteres FEITO
-
-// 6. função de deletar FEITO
-
-// 7. consertar a função de tarefa pronta/não-pronta FEITO COM FALHAS
-
-// 8. contador de tarefas criadas FEITO
-// 9. contador de tarefas concluídas 
-// 9.1 corrigir o bug da key duplicada não deixando repetir o texto de uma tarefa que já existe (BUG)

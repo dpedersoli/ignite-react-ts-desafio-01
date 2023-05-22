@@ -6,10 +6,10 @@ import styles from './Task.module.css'
 interface TaskProps {
   taskContent: string;
   onDeleteTask: (task: string) => void
-  onTaskChecked: (task: boolean) => void
+  onTaskCount: (task: boolean) => void
 }
 
-export function Task({taskContent, onDeleteTask, onTaskChecked}: TaskProps) {
+export function Task({taskContent, onDeleteTask, onTaskCount}: TaskProps) {
   const [isTaskUndone, setIsTaskUndone] = useState(true);
 
   function handleDeleteTask() {
@@ -17,7 +17,8 @@ export function Task({taskContent, onDeleteTask, onTaskChecked}: TaskProps) {
   }
 
   function handleTaskCheck(){
-    onTaskChecked(!isTaskUndone);
+    setIsTaskUndone(!isTaskUndone);
+    onTaskCount(isTaskUndone);
   }
 
   return (
@@ -35,7 +36,7 @@ export function Task({taskContent, onDeleteTask, onTaskChecked}: TaskProps) {
             <Trash size={14} className={styles.trash}/>
           </button>
         </div>
-        : <div className={styles.doneTasks}>
+        : <div className={styles.doneTask}>
           <CheckCircle
             className={styles.doneCircle}
             onClick={handleTaskCheck}
