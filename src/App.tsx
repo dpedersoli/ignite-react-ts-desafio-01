@@ -8,6 +8,8 @@ import { Notepad, PlusCircle } from 'phosphor-react'
 import styles from './App.module.css'
 import './global.css'
 
+// import TodoList from './TodoList';
+
 export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
@@ -40,7 +42,16 @@ export function App() {
   }
 
   function checkTask(taskToCheck: boolean){
-    return !taskToCheck
+    const updatedCheckedTasks = tasks.map((task: any) => {
+      if (task.onTaskChecked === taskToCheck) {
+        return { ...task, onTaskChecked: !taskToCheck };
+      }
+      return task;
+    });
+    
+    setTasks(updatedCheckedTasks);
+
+    // return !taskToCheck
   }
 
   return (
@@ -78,10 +89,10 @@ export function App() {
         {
           tasks.length > 0 ?
             <div className={styles.tasksTable}>
-              {tasks.map((task, id) => {
+              {tasks.map((task) => {
                 return (
                   <Task
-                    key={id}
+                    key={task}
                     taskContent={task}
                     onDeleteTask={deleteTask}
                     onTaskChecked={checkTask}
@@ -97,6 +108,7 @@ export function App() {
         }
 
       </main>
+      {/* <TodoList/> */}
     </>
   )
 }
@@ -113,4 +125,4 @@ export function App() {
 
 // 8. contador de tarefas criadas FEITO
 // 9. contador de tarefas concluídas 
-// 9.1 enviar o 'true'/'false' de cada tarefa KEY
+// 9.1 corrigir o bug da key duplicada não deixando repetir o texto de uma tarefa que já existe (BUG)

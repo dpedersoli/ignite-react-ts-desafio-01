@@ -10,20 +10,20 @@ interface TaskProps {
 }
 
 export function Task({taskContent, onDeleteTask, onTaskChecked}: TaskProps) {
-  const [isTaskDone, setIsTaskDone] = useState(true);
+  const [isTaskUndone, setIsTaskUndone] = useState(true);
 
   function handleDeleteTask() {
     onDeleteTask(taskContent)
   }
 
   function handleTaskCheck(){
-    onTaskChecked(!isTaskDone);
+    onTaskChecked(!isTaskUndone);
   }
 
   return (
     <div className={styles.task}>
       {
-        isTaskDone ?
+        isTaskUndone ?
         <div className={styles.undoneTask}>
           <Circle
             className={styles.undoneCircle}

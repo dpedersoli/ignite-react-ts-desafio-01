@@ -78,3 +78,11 @@ export default TodoList;
 // import TodoList from './TodoList';
 
 // <TodoList />
+
+// In this code, we define the Todo interface to represent the structure of each to-do item. We use the useState hook to manage the state of our to-do list and the input field for adding new to-do items. The handleInputChange function updates the newTodo state as the user types in the input field. The handleAddTodo function adds a new to-do item to the list when the user clicks the "Add Todo" button.
+
+// We also have the handleToggleComplete function to mark a to-do item as complete or incomplete when the user toggles the checkbox. The handleDeleteTodo function removes a to-do item from the list when the user clicks the "Delete" button.
+
+// Finally, we render the list of to-do items using the map function on the todos state array. Each to-do item is displayed with a checkbox, the item text, and a delete button.
+
+// To use this TodoList component, you can import and include it in your main App.tsx file or any other parent component as needed:
