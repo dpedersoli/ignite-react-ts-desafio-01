@@ -12,6 +12,7 @@ export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
   const [doneTasks, setDoneTasks] = useState(0);
+  const [totalOfTasks, setTotalOfTasks] = useState(0)
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
 
@@ -23,6 +24,8 @@ export function App() {
         if (!checkIfTaskExists(newTaskText)) {
 
           setTasks([...tasks, newTaskText])
+
+          setTotalOfTasks(totalOfTasks + 1)
           
           setNewTaskText('')
 
@@ -104,7 +107,7 @@ export function App() {
         }
 
         <div className={styles.tasksCounter}>
-          <p>Tarefas criadas <span>{tasks.length}</span></p>
+          <p>Tarefas criadas <span>{totalOfTasks}</span></p>
           <p>Concluídas <span>{doneTasks} de {tasks.length}</span></p>
         </div>
 
