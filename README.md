@@ -12,4 +12,9 @@
 
 ## O que foi aproveitado no projeto:
 
-Typescript; Responsividade; CSS Modules para estilização; Phosphor React para ícones; Date-fns para manipulação de datas; regras e técnicas de Clean Code
+- Typescript;
+- Responsividade;
+- CSS Modules;
+- Phosphor React;
+- Date-fns;
+- Regras e técnicas de Clean Code;
