@@ -1,6 +1,4 @@
-# Desafio 01 Ignite da Rocketseat
-
-## O desafio consiste em:
+## A página tem como base um desafio, que consiste em:
 
 **1.** Adicionar uma nova tarefa
 
