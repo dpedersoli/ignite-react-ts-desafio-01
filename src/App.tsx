@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
 import { Header } from './Components/Header'
 import { Task } from './Components/Task'
@@ -12,34 +12,50 @@ export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
   const [doneTasks, setDoneTasks] = useState(0);
-  const [totalOfTasks, setTotalOfTasks] = useState(0)
+  const [totalOfTasks, setTotalOfTasks] = useState(0) //mexer nisso p/ contar direito dps do 'getItem'
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
-
+  
+  useEffect(() => {
+    const localStorageJSON = JSON.stringify(tasks)
+    
+    if(tasks.length > 0){ //consertar isso p/ ">= 0"
+      localStorage.setItem('@to-do-list:1.0.0', localStorageJSON)
+    }
+  },[tasks])
+  
+  useEffect(() => {
+    const storageTasks = localStorage.getItem('@to-do-list:1.0.0')
+    
+    if(storageTasks){
+      setTasks(JSON.parse(storageTasks))
+    }
+  },[])
+    
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
+    
+    if(newTaskText.length > 0) {
 
-      if(newTaskText.length > 0) {
+      if (!checkIfTaskExists(newTaskText)) {
 
-        if (!checkIfTaskExists(newTaskText)) {
+        setTasks([...tasks, newTaskText])
 
-          setTasks([...tasks, newTaskText])
-
-          setTotalOfTasks(totalOfTasks + 1)
-          
-          setNewTaskText('')
-
-          setIsInputEmpty(false)
-          setIsTaskExists(false)
-        } else {
-          setIsTaskExists(true)
-          setIsInputEmpty(false)
-        } 
+        setTotalOfTasks(totalOfTasks + 1)
         
-      } else {
-        setIsInputEmpty(true)
+        setNewTaskText('')
+
+        setIsInputEmpty(false)
         setIsTaskExists(false)
-      }
+      } else {
+        setIsTaskExists(true)
+        setIsInputEmpty(false)
+      } 
+      
+    } else {
+      setIsInputEmpty(true)
+      setIsTaskExists(false)
+    }
   }
 
   function checkIfTaskExists(curentTaskInput: string) {
