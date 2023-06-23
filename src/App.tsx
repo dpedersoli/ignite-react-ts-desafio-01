@@ -12,7 +12,7 @@ export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
   const [doneTasks, setDoneTasks] = useState(0);
-  const [totalOfTasks, setTotalOfTasks] = useState(0) //mexer nisso p/ contar direito dps do 'getItem'
+  const [totalOfTasks, setTotalOfTasks] = useState(tasks.length) //mexer nisso p/ contar direito dps do 'getItem' -> A POSSÍVEL SOLUÇÃO SERIA ENVIAR O VALOR DE 'totalOfTasks' PRO LS E TAMBÉM RESGATÁ-LO AO DAR 'getImte()'
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   
@@ -29,6 +29,7 @@ export function App() {
     
     if(storageTasks){
       setTasks(JSON.parse(storageTasks))
+      setTotalOfTasks(JSON.parse(storageTasks).length)
     }
   },[])
     
