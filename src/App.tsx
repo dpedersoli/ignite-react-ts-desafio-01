@@ -12,24 +12,30 @@ export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
   const [doneTasks, setDoneTasks] = useState(0);
-  const [totalOfTasks, setTotalOfTasks] = useState(tasks.length) //mexer nisso p/ contar direito dps do 'getItem' -> A POSSÍVEL SOLUÇÃO SERIA ENVIAR O VALOR DE 'totalOfTasks' PRO LS E TAMBÉM RESGATÁ-LO AO DAR 'getImte()'
+  const [totalOfTasks, setTotalOfTasks] = useState(tasks.length)
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   
   useEffect(() => {
-    const localStorageJSON = JSON.stringify(tasks)
+    const localStorageTasksList = JSON.stringify(tasks)
+    const localStorageTotalTasks = JSON.stringify(totalOfTasks)
     
-    if(tasks.length > 0){ //consertar isso p/ ">= 0"
-      localStorage.setItem('@to-do-list:1.0.0', localStorageJSON)
+    if(tasks.length > 0){ //consertar isso p/ ">= 0"??
+      localStorage.setItem('@to-do-list:tasks-list-1.0.0', localStorageTasksList)
+      localStorage.setItem('@to-do-list:total-tasks-1.0.0', localStorageTotalTasks)
     }
-  },[tasks])
+  },[tasks, totalOfTasks])
   
   useEffect(() => {
-    const storageTasks = localStorage.getItem('@to-do-list:1.0.0')
+    const storageTasksList = localStorage.getItem('@to-do-list:tasks-list-1.0.0')
+    const storageTotalTasks = localStorage.getItem('@to-do-list:total-tasks-1.0.0')
     
-    if(storageTasks){
-      setTasks(JSON.parse(storageTasks))
-      setTotalOfTasks(JSON.parse(storageTasks).length)
+    if(storageTasksList){
+      setTasks(JSON.parse(storageTasksList))
+
+      if(storageTotalTasks){
+        setTotalOfTasks(JSON.parse(storageTotalTasks))
+      }
     }
   },[])
     
