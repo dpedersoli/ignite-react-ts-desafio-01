@@ -15,29 +15,6 @@ export function App() {
   const [totalOfTasks, setTotalOfTasks] = useState(tasks.length)
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
-  
-  useEffect(() => {
-    const localStorageTasksList = JSON.stringify(tasks)
-    const localStorageTotalTasks = JSON.stringify(totalOfTasks)
-    
-    if(tasks.length > 0){ //consertar isso p/ ">= 0"??
-      localStorage.setItem('@to-do-list:tasks-list-1.0.0', localStorageTasksList)
-      localStorage.setItem('@to-do-list:total-tasks-1.0.0', localStorageTotalTasks)
-    }
-  },[tasks, totalOfTasks])
-  
-  useEffect(() => {
-    const storageTasksList = localStorage.getItem('@to-do-list:tasks-list-1.0.0')
-    const storageTotalTasks = localStorage.getItem('@to-do-list:total-tasks-1.0.0')
-    
-    if(storageTasksList){
-      setTasks(JSON.parse(storageTasksList))
-
-      if(storageTotalTasks){
-        setTotalOfTasks(JSON.parse(storageTotalTasks))
-      }
-    }
-  },[])
     
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
