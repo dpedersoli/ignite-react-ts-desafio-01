@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
 import { Header } from './Components/Header'
 import { Task } from './Components/Task'
@@ -16,6 +16,28 @@ export function App() {
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   
+  const localStorageTasksList = JSON.stringify(tasks)
+  const localStorageTotalTasks = JSON.stringify(totalOfTasks)
+  const storageTasksList = localStorage.getItem('@to-do-list:tasks-list-1.0.0')
+  const storageTotalTasks = localStorage.getItem('@to-do-list:total-tasks-1.0.0')
+
+  useEffect(() => {
+    if(tasks.length >= 0){
+      localStorage.setItem('@to-do-list:tasks-list-1.0.0', localStorageTasksList)
+      localStorage.setItem('@to-do-list:total-tasks-1.0.0', localStorageTotalTasks)
+    }
+  },[tasks, totalOfTasks])
+  
+  useEffect(() => {
+    if(storageTasksList){
+      setTasks(JSON.parse(storageTasksList))
+
+      if(storageTotalTasks){
+        setTotalOfTasks(JSON.parse(storageTotalTasks))
+      }
+    }
+  },[])
+    
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
     
