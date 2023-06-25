@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { Header } from './Components/Header'
 import { Task } from './Components/Task'
@@ -15,7 +15,7 @@ export function App() {
   const [totalOfTasks, setTotalOfTasks] = useState(tasks.length)
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
-    
+  
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
     
