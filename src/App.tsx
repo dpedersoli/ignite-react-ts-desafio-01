@@ -97,6 +97,16 @@ export function App() {
     }
   }
 
+  ////////////////////////////////////////////////////
+  function isTaskUndone(taskToCheck: boolean) {
+    console.log('taskToCheck BEFORE: ', taskToCheck)
+    if(taskToCheck){
+      console.log('taskToCheck AFTER: ', taskToCheck)
+      !taskToCheck
+    }
+  }
+  ////////////////////////////////////////////////////
+
   return (
     <>
       <header>
@@ -143,6 +153,7 @@ export function App() {
                     key={task}
                     taskContent={task}
                     onDeleteTask={deleteTask}
+                    onIsUnTaskDone={isTaskUndone}
                   />
                 )
               })}
