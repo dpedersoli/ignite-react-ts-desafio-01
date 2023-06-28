@@ -17,10 +17,10 @@ export function Task({taskContent, onDeleteTask, onTaskCount, onIsUnTaskDone}: T
     onDeleteTask(taskContent)
   }
 
-  //////////////////////////////////////////////////// Será que preciso adicionar algum retorno aqui? Talvez eu deva fazer as alterações de estado onde a função é criada e aqui ele somente recebe o valor sem mudar estado ('taskUndone')
+  //////////////////////////////////////////////////// Será que preciso adicionar algum retorno aqui? Talvez eu deva fazer as alterações de estado onde a função é criada e aqui ele somente recebe o valor sem mudar estado ('taskUndone') -> e lá na função em 'App.tsx' eu tenho que salvar no LS o estado da task atual
   function handleTaskCheck(){
     onIsUnTaskDone(taskUndone)
-    // setTaskUndone(!taskUndone);
+    setTaskUndone(!taskUndone); //
     onTaskCount(taskUndone);
   }
   ////////////////////////////////////////////////////
