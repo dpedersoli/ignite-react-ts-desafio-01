@@ -7,20 +7,20 @@ interface TaskProps {
   taskContent: string;
   onDeleteTask: (task: string) => void
   onTaskCount: (task: boolean) => void
-  onIsUnTaskDone: (task: boolean) => void
+  onIsUndoneTask: (task: boolean) => void
 }
 
-export function Task({taskContent, onDeleteTask, onTaskCount, onIsUnTaskDone}: TaskProps) {
+export function Task({taskContent, onDeleteTask, onTaskCount, onIsUndoneTask}: TaskProps) {
   const [taskUndone, setTaskUndone] = useState(true);
 
   function handleDeleteTask() {
     onDeleteTask(taskContent)
   }
 
-  //////////////////////////////////////////////////// Será que preciso adicionar algum retorno aqui? Talvez eu deva fazer as alterações de estado onde a função é criada e aqui ele somente recebe o valor sem mudar estado ('taskUndone') -> e lá na função em 'App.tsx' eu tenho que salvar no LS o estado da task atual
+  //////////////////////////////////////////////////// Aqui precisa mudar o estilo (OK!); 'onIsUndoneTask' precisa p/ receber o valor dentro do componente (essencial para o LS) (OK!); 'onTaskCount' também precisará de info pro LS
   function handleTaskCheck(){
-    onIsUnTaskDone(taskUndone)
-    // setTaskUndone(!taskUndone);
+    setTaskUndone(!taskUndone);
+    onIsUndoneTask(taskUndone)
     onTaskCount(taskUndone);
   }
   ////////////////////////////////////////////////////
@@ -29,19 +29,24 @@ export function Task({taskContent, onDeleteTask, onTaskCount, onIsUnTaskDone}: T
     <div className={styles.task}>
         <div className={styles.undoneTask}>
           { taskUndone ?
+          <>
             <Circle
               className={styles.undoneCircle}
               onClick={handleTaskCheck}
               size={24}
-            />:
+              />
+            <p>{taskContent}</p>
+          </> :
+          <>
             <CheckCircle
               className={styles.doneCircle}
               onClick={handleTaskCheck}
               size={24}
               weight="fill"
             />
+            <p className={styles.doneTask}> {taskContent} </p>
+          </>
           }
-          <p>{taskContent}</p>
           <button onClick={handleDeleteTask} title="deletar tarefa">
             <Trash size={14} className={styles.trash}/>
           </button>

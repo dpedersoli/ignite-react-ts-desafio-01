@@ -15,6 +15,7 @@ export function App() {
   const [totalOfTasks, setTotalOfTasks] = useState(tasks.length)
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
+  const [isTaskUndone, setIsTaskUndone] = useState(true)
   
   const localStorageTasksList = JSON.stringify(tasks)
   const localStorageTotalTasks = JSON.stringify(totalOfTasks)
@@ -97,12 +98,15 @@ export function App() {
     }
   }
 
-  ////////////////////////////////////////////////////aqui
-  function isTaskUndone(taskToCheck: boolean) {
-    console.log('taskToCheck BEFORE: ', taskToCheck)
+  ////////////////////////////////////////////////////aqui eu passo algo que vou jogar LÁ dentro do Componente
+  function checkIfTaskIsDone(taskToCheck: boolean) {
+    // console.log('taskToCheck antes: ', taskToCheck)
+    console.log('isTaskUndone antes: ', isTaskUndone)
     if(taskToCheck){
-      console.log('taskToCheck AFTER: ', taskToCheck)
-      !taskToCheck
+      setIsTaskUndone(!taskToCheck)
+      // console.log('taskToCheck depois: ', taskToCheck)
+      console.log('isTaskUndone depois: ', isTaskUndone)
+      return !taskToCheck
     }
   }
   ////////////////////////////////////////////////////até aqui
@@ -153,7 +157,7 @@ export function App() {
                     key={task}
                     taskContent={task}
                     onDeleteTask={deleteTask}
-                    onIsUnTaskDone={isTaskUndone}
+                    onIsUndoneTask={checkIfTaskIsDone}
                   />
                 )
               })}
