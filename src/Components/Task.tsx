@@ -20,10 +20,10 @@ export function Task({taskContent, onDeleteTask, onTaskCount, onIsUndoneTask}: T
   //////////////////////////////////////////////////// Aqui precisa mudar o estilo (OK!); 'onIsUndoneTask' precisa p/ receber o valor dentro do componente (essencial para o LS) (OK!); 'onTaskCount' também precisará de info pro LS
   function handleTaskCheck(){
     setTaskUndone(!taskUndone);
-    onIsUndoneTask(taskUndone)
+    // onIsUndoneTask(taskUndone)
     onTaskCount(taskUndone);
   }
-  ////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////
 
   return (
     <div className={styles.task}>
