@@ -8,9 +8,10 @@ interface TaskProps {
   onDeleteTask: (task: string) => void
   onTaskCount: (task: boolean) => void
   onIsUndoneTask: (task: boolean) => void
+  taskStatus: 'done' | 'undone'
 }
 
-export function Task({taskContent, onDeleteTask, onTaskCount, onIsUndoneTask}: TaskProps) {
+export function Task({taskContent, onDeleteTask, onTaskCount, onIsUndoneTask, taskStatus}: TaskProps) {
   const [taskUndone, setTaskUndone] = useState(true);
 
   function handleDeleteTask() {
