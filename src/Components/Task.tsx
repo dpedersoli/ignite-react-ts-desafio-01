@@ -11,7 +11,7 @@ interface TaskProps {
   taskStatus: 'done' | 'undone'
 }
 
-export function Task({taskContent, onDeleteTask, onTaskCount, onIsUndoneTask, taskStatus}: TaskProps) {
+export function Task({taskContent, onDeleteTask, onTaskCount, onIsUndoneTask, taskStatus = 'undone'}: TaskProps) {
   const [taskUndone, setTaskUndone] = useState(true);
 
   function handleDeleteTask() {
@@ -29,24 +29,26 @@ export function Task({taskContent, onDeleteTask, onTaskCount, onIsUndoneTask, ta
   return (
     <div className={styles.task}>
         <div className={styles.undoneTask}>
-          { taskUndone ?
-          <>
-            <Circle
-              className={styles.undoneCircle}
-              onClick={handleTaskCheck}
-              size={24}
+          { taskStatus == 'undone' &&
+            <>
+              <Circle
+                className={styles.undoneCircle}
+                onClick={handleTaskCheck}
+                size={24}
+                />
+              <p>{taskContent}</p>
+            </>
+          }
+          { taskStatus == 'done' &&
+            <>
+              <CheckCircle
+                className={styles.doneCircle}
+                onClick={handleTaskCheck}
+                size={24}
+                weight="fill"
               />
-            <p>{taskContent}</p>
-          </> :
-          <>
-            <CheckCircle
-              className={styles.doneCircle}
-              onClick={handleTaskCheck}
-              size={24}
-              weight="fill"
-            />
-            <p className={styles.doneTask}> {taskContent} </p>
-          </>
+              <p className={styles.doneTask}> {taskContent} </p>
+            </>
           }
           <button onClick={handleDeleteTask} title="deletar tarefa">
             <Trash size={14} className={styles.trash}/>

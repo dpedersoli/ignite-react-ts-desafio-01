@@ -158,6 +158,7 @@ export function App() {
                     taskContent={task}
                     onDeleteTask={deleteTask}
                     onIsUndoneTask={checkIfTaskIsDone}
+                    taskStatus='undone'
                   />
                 )
               })}
