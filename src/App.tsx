@@ -11,11 +11,12 @@ import './global.css'
 export function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
-  const [doneTasks, setDoneTasks] = useState(0);
+  const [doneTasksCounter, setDoneTasksCounter] = useState(0);
   const [totalOfTasks, setTotalOfTasks] = useState(tasks.length)
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   const [isTaskUndone, setIsTaskUndone] = useState(true)
+  // const [doneTask, setDoneTask] = useState('done') -> DEU RUIM -> tem que ser feito o salvamento do LS dentro do componente 'Task' -> provavelmente aqui só vai alterar de 'undone' p/ 'done' (e visse versa)
   
   const localStorageTasksList = JSON.stringify(tasks)
   const localStorageTotalTasks = JSON.stringify(totalOfTasks)
@@ -85,16 +86,16 @@ export function App() {
 
     setTasks(tasksWithoutDeletedOne)
 
-    if(doneTasks >= tasks.length) {
-      setDoneTasks(doneTasks - 1)
+    if(doneTasksCounter >= tasks.length) {
+      setDoneTasksCounter(doneTasksCounter - 1)
     }
   }
 
   function taskCounter(taskToCount: boolean) {
     if(!taskToCount){
-      setDoneTasks(doneTasks - 1)
+      setDoneTasksCounter(doneTasksCounter - 1)
     } else if (taskToCount){
-      setDoneTasks(doneTasks + 1)
+      setDoneTasksCounter(doneTasksCounter + 1)
     }
   }
 
@@ -144,7 +145,7 @@ export function App() {
 
         <div className={styles.tasksCounter}>
           <p>Tarefas criadas <span>{totalOfTasks}</span></p>
-          <p>Concluídas <span>{doneTasks} de {tasks.length}</span></p>
+          <p>Concluídas <span>{doneTasksCounter} de {tasks.length}</span></p>
         </div>
 
         {
@@ -158,7 +159,7 @@ export function App() {
                     taskContent={task}
                     onDeleteTask={deleteTask}
                     onIsUndoneTask={checkIfTaskIsDone}
-                    taskStatus='undone'
+                    taskStatus='done'
                   />
                 )
               })}
