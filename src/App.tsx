@@ -16,7 +16,7 @@ export function App() {
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   const [isTaskUndone, setIsTaskUndone] = useState(true)
-  /// const [doneTask, setDoneTask] = useState('done') -> DEU RUIM -> tem que ser feito o salvamento do LS dentro do componente 'Task' -> provavelmente aqui só vai alterar de 'undone' p/ 'done' (e visse versa)
+  //// const [doneTask, setDoneTask] = useState('done') -> DEU RUIM -> tem que ser feito o salvamento do LS dentro do componente 'Task' -> provavelmente aqui só vai alterar de 'undone' p/ 'done' (e visse versa)
   
   const localStorageTasksList = JSON.stringify(tasks)
   const localStorageTotalTasks = JSON.stringify(totalOfTasks)
