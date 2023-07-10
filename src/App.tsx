@@ -16,41 +16,41 @@ export function App() {
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
   const [isTaskUndone, setIsTaskUndone] = useState(true)
-  //// const [doneTask, setDoneTask] = useState('done') -> DEU RUIM -> tem que ser feito o salvamento do LS dentro do componente 'Task' -> provavelmente aqui só vai alterar de 'undone' p/ 'done' (e visse versa)
-  
+  // const [doneTask, setDoneTask] = useState('done') -> DEU RUIM -> tem que ser feito o salvamento do LS dentro do componente 'Task' -> provavelmente aqui só vai alterar de 'undone' p/ 'done' (e visse versa)
+
   const localStorageTasksList = JSON.stringify(tasks)
   const localStorageTotalTasks = JSON.stringify(totalOfTasks)
   const storageTasksList = localStorage.getItem('@to-do-list:tasks-list-1.0.0')
   const storageTotalTasks = localStorage.getItem('@to-do-list:total-tasks-1.0.0')
 
   useEffect(() => {
-    if(tasks.length >= 0){
+    if (tasks.length >= 0) {
       localStorage.setItem('@to-do-list:tasks-list-1.0.0', localStorageTasksList)
       localStorage.setItem('@to-do-list:total-tasks-1.0.0', localStorageTotalTasks)
     }
-  },[tasks, totalOfTasks])
-  
+  }, [tasks, totalOfTasks])
+
   useEffect(() => {
-    if(storageTasksList){
+    if (storageTasksList) {
       setTasks(JSON.parse(storageTasksList))
 
-      if(storageTotalTasks){
+      if (storageTotalTasks) {
         setTotalOfTasks(JSON.parse(storageTotalTasks))
       }
     }
-  },[])
-    
+  }, [])
+
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
-    
-    if(newTaskText.length > 0) {
+
+    if (newTaskText.length > 0) {
 
       if (!checkIfTaskExists(newTaskText)) {
 
         setTasks([...tasks, newTaskText])
 
         setTotalOfTasks(totalOfTasks + 1)
-        
+
         setNewTaskText('')
 
         setIsInputEmpty(false)
@@ -58,8 +58,8 @@ export function App() {
       } else {
         setIsTaskExists(true)
         setIsInputEmpty(false)
-      } 
-      
+      }
+
     } else {
       setIsInputEmpty(true)
       setIsTaskExists(false)
@@ -86,15 +86,15 @@ export function App() {
 
     setTasks(tasksWithoutDeletedOne)
 
-    if(doneTasksCounter >= tasks.length) {
+    if (doneTasksCounter >= tasks.length) {
       setDoneTasksCounter(doneTasksCounter - 1)
     }
   }
 
   function taskCounter(taskToCount: boolean) {
-    if(!taskToCount){
+    if (!taskToCount) {
       setDoneTasksCounter(doneTasksCounter - 1)
-    } else if (taskToCount){
+    } else if (taskToCount) {
       setDoneTasksCounter(doneTasksCounter + 1)
     }
   }
@@ -103,7 +103,7 @@ export function App() {
   function checkIfTaskIsDone(taskToCheck: boolean) {
     // console.log('taskToCheck antes: ', taskToCheck)
     console.log('isTaskUndone antes: ', isTaskUndone)
-    if(taskToCheck){
+    if (taskToCheck) {
       setIsTaskUndone(!taskToCheck)
       // console.log('taskToCheck depois: ', taskToCheck)
       console.log('isTaskUndone depois: ', isTaskUndone)
@@ -135,11 +135,11 @@ export function App() {
           </button>
         </form>
 
-        { isInputEmpty &&
+        {isInputEmpty &&
           <p className={styles.errorMessage} >Esse campo é obrigatório</p>
         }
 
-        { isTaskExists &&
+        {isTaskExists &&
           <p className={styles.errorMessage} >Essa tarefa já existe na lista. Crie uma nova</p>
         }
 
