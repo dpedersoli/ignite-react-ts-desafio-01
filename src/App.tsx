@@ -99,10 +99,10 @@ export function App() {
   }
 
   ////////////////////////////////////////////////////
-  function handleTaskStatus(newValue: string) {
-    setTaskStatus(newValue);
+  function handleTaskStatus(newTaskStatus: string) {
+    setTaskStatus(newTaskStatus);
   }
-  ////////////////////////////////////////////////////
+  //////////////////////////////////////////////////// 
 
   return (
     <>
@@ -146,6 +146,7 @@ export function App() {
               {tasks.map((task) => {
                 return (
                   <Task
+                    // id={task}
                     onTaskCount={taskCounter}
                     key={task}
                     taskContent={task}
