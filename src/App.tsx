@@ -15,8 +15,7 @@ export function App() {
   const [totalOfTasks, setTotalOfTasks] = useState(tasks.length)
   const [isTaskExists, setIsTaskExists] = useState(false)
   const [isInputEmpty, setIsInputEmpty] = useState(false);
-  const [isTaskUndone, setIsTaskUndone] = useState(true)
-  // const [doneTask, setDoneTask] = useState('done') -> DEU RUIM -> tem que ser feito o salvamento do LS dentro do componente 'Task' -> provavelmente aqui só vai alterar de 'undone' p/ 'done' (e visse versa)
+  const [taskStatus, setTaskStatus] = useState('undone')
 
   const localStorageTasksList = JSON.stringify(tasks)
   const localStorageTotalTasks = JSON.stringify(totalOfTasks)
@@ -93,24 +92,17 @@ export function App() {
 
   function taskCounter(taskToCount: boolean) {
     if (!taskToCount) {
-      setDoneTasksCounter(doneTasksCounter - 1)
-    } else if (taskToCount) {
       setDoneTasksCounter(doneTasksCounter + 1)
+    } else if (taskToCount) {
+      setDoneTasksCounter(doneTasksCounter - 1)
     }
   }
 
-  ////////////////////////////////////////////////////aqui eu passo algo que vou jogar LÁ dentro do Componente
-  function checkIfTaskIsDone(taskToCheck: boolean) {
-    // console.log('taskToCheck antes: ', taskToCheck)
-    console.log('isTaskUndone antes: ', isTaskUndone)
-    if (taskToCheck) {
-      setIsTaskUndone(!taskToCheck)
-      // console.log('taskToCheck depois: ', taskToCheck)
-      console.log('isTaskUndone depois: ', isTaskUndone)
-      return !taskToCheck
-    }
+  ////////////////////////////////////////////////////
+  function handleTaskStatus(newValue: string) {
+    setTaskStatus(newValue);
   }
-  ////////////////////////////////////////////////////até aqui
+  ////////////////////////////////////////////////////
 
   return (
     <>
@@ -158,8 +150,8 @@ export function App() {
                     key={task}
                     taskContent={task}
                     onDeleteTask={deleteTask}
-                    onIsUndoneTask={checkIfTaskIsDone}
-                    taskStatus='done'
+                    taskStatus={taskStatus}
+                    onTaskStatusChange={handleTaskStatus}
                   />
                 )
               })}
