@@ -4,7 +4,7 @@ import { CheckCircle, Circle, Trash } from 'phosphor-react'
 import styles from './Task.module.css'
 
 interface TaskProps {
-  // id: number -> "how to change the property value of only one item of an array through a component using react with typescript"
+  //// id: number -> "how to change the property value of only one item of an array through a component using react with typescript"
   taskContent: string;
   onDeleteTask: (task: string) => void
   onTaskCount: (task: boolean) => void
