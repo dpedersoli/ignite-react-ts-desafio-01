@@ -24,11 +24,13 @@ export function Task({taskContent, onDeleteTask, onTaskCount, taskStatus, onTask
     setTaskDone(!isTaskDone);
     onTaskCount(isTaskDone);
 
+    //isso precisa ir para o chamamento do componente
     if(taskStatus == 'undone'){
       onTaskStatusChange('done')
     } else if(taskStatus == 'done'){
       onTaskStatusChange('undone')
     }
+    //isso precisa ir para o chamamento do componente
   }
 
   return (
