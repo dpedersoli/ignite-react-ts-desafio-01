@@ -98,7 +98,7 @@ export function App() {
     }
   }
 
-  ////////////////////////////////////////////////////
+  //////////////////////////////////////////////////// how to change a specific attribute of a specific element in a array through a component using react with typescript
   function handleTaskStatus(newTaskStatus: string) {
     setTaskStatus(newTaskStatus);
   }
@@ -146,7 +146,6 @@ export function App() {
               {tasks.map((task) => {
                 return (
                   <Task
-                    // id={task}
                     onTaskCount={taskCounter}
                     key={task}
                     taskContent={task}
